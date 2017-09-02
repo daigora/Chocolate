@@ -30,9 +30,9 @@ int main(int argc, char const *argv[]) {
 
   int array[n];
 
-  int randNum = rand()%9999+1000; // Genera numeros de 1000 a 9999
+  int randNum = rand()%9999+1000; // Genera un numero aleatorio entre 1000 a 9999
 
-  for(int i = 0; i < n; i++) {
+  for (int i = 0; i < n; i++) {
     array[i] = randNum-i;
   }
 
@@ -78,13 +78,13 @@ int binarySearch(int array[], int n, int sought){
   int left = 0;
   int right = n-1;
 
-  while(left <= right) {
+  while (left <= right) {
     middle = (left+right)/2;
-    if(sought > array[middle]) {
+    if (sought > array[middle]) {
       left = middle+1;
-    }else if(sought < array[middle]) {
+    } else if (sought < array[middle]) {
       right = middle-1;
-    }else {
+    } else {
       return middle;
     }
   }
