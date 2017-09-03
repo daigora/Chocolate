@@ -1,6 +1,6 @@
 /**
   Diego Alejandro Rodriguez Ayala - 20142020068
-  Practica para estudiar el algoritmo de ordenamiento shell y su comportamiento
+  Practica para estudiar el algoritmo de ordenamiento Shell Sort y su comportamiento
   Ademas se calcula tiempo de ejecución del algoritmo para compararlo despues con el t(n) teorico.
 **/
 #include <stdio.h>

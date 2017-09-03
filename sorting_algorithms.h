@@ -80,8 +80,18 @@ void shellSort(int *array, int n) {
   }
 }
 
+// Función para rellenar un arreglo de formar descendente (peor caso)
+void fillArray(int *array, int n) {
+
+  int randNum = rand()%9999+1000; // Genera un numero aleatorio entre 1000 a 9999
+
+  for (int i = 0; i < n; i++) {
+    array[i] = randNum-i;
+  }
+}
+
 // Función que imprime un arreglo ingresado por parametro <a[]>.
-void printArray(int array[], int n){
+void printArray(int *array, int n) {
 
   for (int i = 0; i < n; i++) {
     cout << array[i] << " ";
