@@ -10,7 +10,7 @@
 using namespace std;
 
 // Función que intercambia dos valores de un mismo arreglo.
-void exchange(int array[], int min, int j) {
+void exchange(int *array, int min, int j) {
 
   int n = array[j];
   array[j] = array[min];
@@ -18,7 +18,7 @@ void exchange(int array[], int min, int j) {
 }
 
 // Algoritmo de ordenamiento (Selección).
-void selectionSort(int array[], int n) {
+void selectionSort(int *array, int n) {
 
   int min;
 
@@ -34,7 +34,7 @@ void selectionSort(int array[], int n) {
 }
 
 // Algoritmo de ordenamiento (Inserción).
-void insertionSort(int array[], int n) {
+void insertionSort(int *array, int n) {
 
   int j, v;
 
@@ -50,7 +50,7 @@ void insertionSort(int array[], int n) {
 }
 
 // Algoritmo de ordenamiento (Burbuja).
-void bubbleSort(int array[], int n) {
+void bubbleSort(int *array, int n) {
 
   for (int i = n; i >= 0; i--) {
       for (int j = 1; j < i; j++) {
@@ -58,6 +58,25 @@ void bubbleSort(int array[], int n) {
           exchange(array, j-1, j);
         }
       }
+  }
+}
+
+// Algoritmo de ordenamiento (Shell) (n>=20)
+void shellSort(int *array, int n) {
+
+  int i, j, h, v;
+
+  for (h = 0; h < (n-1)/9 ; h = 3*h+1);
+  for (; h > 0; h/=3) {
+    for (i = h; i < n; i++) {
+      v = array[i];
+      j = i;
+      while ((j >= h) && (array[j-h] > v)) {
+        array[j] = array[j-h];
+        j-=h;
+      }
+      array[j] = v;
+    }
   }
 }
 
