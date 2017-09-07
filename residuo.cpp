@@ -85,6 +85,7 @@ void residuo(int *array, int left, int right, int bit) {
 }
 
 inline unsigned bits(int k, int j, int x) {
+  
   return (x>>k) & ~(~0<<j);
 }
 /*

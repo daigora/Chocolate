@@ -69,7 +69,7 @@ void radixSort(int *array, int n) {
   }
 }
 
-// Función para encontrar el max de un arreglo
+// Función para encontrar el numero maximo de un arreglo
 int max(int *array, int n) {
 
   int max = array[0];

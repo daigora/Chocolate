@@ -80,6 +80,108 @@ void shellSort(int *array, int n) {
   }
 }
 
+// Algoritmo de ordenamiento (ordenamiento rapido) (Default left: 0, right: n-1)
+void quickSort(int *array, int left, int right) {
+
+  int i, j, v;
+
+  if (right > left) {
+    v = array[right];
+    i = left-1;
+    j = right;
+    for (;;) {
+      while (array[++i] < v);
+      while (array[--j] > v);
+      if (i >= j) {
+        break;
+      }
+      exchange(array, i, j);
+    }
+    exchange(array, i, right);
+    quickSort(array, left, i-1);
+    quickSort(array, i+1, right);
+  }
+}
+
+// Algoritmo de ordenamiento por residuo (Default left: 0, right: n-1, bits: cantidad de bits a evaluar)
+void residuo(int *array, int left, int right, int bit) {
+
+  int i, j;
+
+  if ((right > left) && (bit >= 0)) {
+    i = left;
+    j = right;
+    while (j != i) {
+      while ((!bits(bit, 1, array[i])) && (i < j)) {
+        i++;
+      }
+      while ((bits(bit, 1, array[j])) && (j > i)) {
+        j--;
+      }
+      exchange(array, i, j);
+    }
+    if (!bits(bit, 1, array[i])) {
+      j++;
+    }
+    residuo(array, left, j-1, bit-1);
+    residuo(array, j, right, bit-1);
+  }
+}
+
+// Función para evaluar el valor del bit en una posicion (k) de un numero entero (x) (1: verdadero, 0: falso)
+inline unsigned bits(int k, int j, int x) {
+  
+  return (x>>k) & ~(~0<<j);
+}
+
+// Algoritmo de ordenamiento (Base 10)
+void radixSort(int *array, int n) {
+
+  int m = max(array, n);
+
+  for (int exp = 1; m/exp > 0; exp*=10) {
+    sorting(array, n, exp);
+  }
+}
+
+// Función para encontrar el numero maximo de un arreglo
+int max(int *array, int n) {
+
+  int max = array[0];
+
+  for (int i = 1; i < n; i++) {
+    if (array[i] > max) {
+      max = array[i];
+    }
+  }
+
+  return max;
+}
+
+// Función para ordenar por base 10 y exponente (10, 10^2, 10^3,...)
+void sorting(int *array, int n, int exp){
+
+  int output[n];
+  int i, count[10] = {0};
+
+  for (i = 0; i < n; i++) {
+    count[(array[i]/exp)%10]++;
+  }
+
+  for (i = 1; i < 10; i++) {
+    count[i]+=count[i-1];
+  }
+
+  for (i = n-1; i >= 0; i--) {
+    output[count[(array[i]/exp)%10]-1] = array[i];
+    count[(array[i]/exp)%10]--;
+  }
+
+  for (i = 0; i < n; i++) {
+    array[i] = output[i];
+  }
+}
+
 // Función para rellenar un arreglo de formar descendente (peor caso)
 void fillArray(int *array, int n) {
 
