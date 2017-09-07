@@ -103,6 +103,12 @@ void quickSort(int *array, int left, int right) {
   }
 }
 
+// Función para evaluar el valor del bit en una posicion (k) de un numero entero (x) (1: verdadero, 0: falso) (using: residuo)
+inline unsigned bits(int k, int j, int x) {
+
+  return (x>>k) & ~(~0<<j);
+}
+
 // Algoritmo de ordenamiento por residuo (Default left: 0, right: n-1, bits: cantidad de bits a evaluar)
 void residuo(int *array, int left, int right, int bit) {
 
@@ -128,23 +134,7 @@ void residuo(int *array, int left, int right, int bit) {
   }
 }
 
-// Función para evaluar el valor del bit en una posicion (k) de un numero entero (x) (1: verdadero, 0: falso)
-inline unsigned bits(int k, int j, int x) {
-  
-  return (x>>k) & ~(~0<<j);
-}
-
-// Algoritmo de ordenamiento (Base 10)
-void radixSort(int *array, int n) {
-
-  int m = max(array, n);
-
-  for (int exp = 1; m/exp > 0; exp*=10) {
-    sorting(array, n, exp);
-  }
-}
-
-// Función para encontrar el numero maximo de un arreglo
+// Función para encontrar el numero maximo de un arreglo (using: radixSort)
 int max(int *array, int n) {
 
   int max = array[0];
@@ -158,7 +148,7 @@ int max(int *array, int n) {
   return max;
 }
 
-// Función para ordenar por base 10 y exponente (10, 10^2, 10^3,...)
+// Función para ordenar por base 10 y exponente (10, 10^2, 10^3,...) (using: radixSort)
 void sorting(int *array, int n, int exp){
 
   int output[n];
@@ -179,6 +169,16 @@ void sorting(int *array, int n, int exp){
 
   for (i = 0; i < n; i++) {
     array[i] = output[i];
+  }
+}
+
+// Algoritmo de ordenamiento (Base 10)
+void radixSort(int *array, int n) {
+
+  int m = max(array, n);
+
+  for (int exp = 1; m/exp > 0; exp*=10) {
+    sorting(array, n, exp);
   }
 }
 
