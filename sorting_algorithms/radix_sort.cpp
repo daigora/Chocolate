@@ -106,3 +106,13 @@ void sorting(int *array, int n, int exp){
     array[i] = output[i];
   }
 }
+/*
+// Funcion para medir tiempo de ejecución (windows) - agregar include <windows.h>
+double performancecounter_diff(LARGE_INTEGER *a, LARGE_INTEGER *b) {
+
+  LARGE_INTEGER freq;
+  QueryPerformanceFrequency(&freq);
+
+  return (double)(a->QuadPart - b->QuadPart) / (double)freq.QuadPart;
+}
+*/

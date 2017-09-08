@@ -1,5 +1,8 @@
 /**
   Libreria para reunir algunos algoritmos de ordenamiento.
+    Generalidades:
+      -array: arreglo
+      -n: tamaño del arreglo ingresado
   #include "sorting_algorithms.h"
 **/
 #ifndef SORTING_ALGORITHMS_H
@@ -9,7 +12,7 @@
 
 using namespace std;
 
-// Función que intercambia dos valores de un mismo arreglo.
+// Función que intercambia dos valores de un mismo arreglo
 void exchange(int *array, int min, int j) {
 
   int n = array[j];
@@ -17,7 +20,7 @@ void exchange(int *array, int min, int j) {
   array[min] = n;
 }
 
-// Algoritmo de ordenamiento (Selección).
+// Algoritmo de ordenamiento (Selección)
 void selectionSort(int *array, int n) {
 
   int min;
@@ -33,7 +36,7 @@ void selectionSort(int *array, int n) {
   }
 }
 
-// Algoritmo de ordenamiento (Inserción).
+// Algoritmo de ordenamiento (Inserción)
 void insertionSort(int *array, int n) {
 
   int j, v;
@@ -49,7 +52,7 @@ void insertionSort(int *array, int n) {
   }
 }
 
-// Algoritmo de ordenamiento (Burbuja).
+// Algoritmo de ordenamiento (Burbuja)
 void bubbleSort(int *array, int n) {
 
   for (int i = n; i >= 0; i--) {
@@ -80,7 +83,10 @@ void shellSort(int *array, int n) {
   }
 }
 
-// Algoritmo de ordenamiento (ordenamiento rapido) (Default left: 0, right: n-1)
+/**
+  Algoritmo de ordenamiento (ordenamiento rapido)
+  Default (left: 0, right: n-1)
+*/
 void quickSort(int *array, int left, int right) {
 
   int i, j, v;
@@ -103,13 +109,19 @@ void quickSort(int *array, int left, int right) {
   }
 }
 
-// Función para evaluar el valor del bit en una posicion (k) de un numero entero (x) (1: verdadero, 0: falso) (using: residuo)
+/**
+  Función para evaluar el valor del bit para una posicion (k) de un numero entero (x)  (using: residuo)
+  return (1: verdadero ó 0: falso)
+*/
 inline unsigned bits(int k, int j, int x) {
 
   return (x>>k) & ~(~0<<j);
 }
 
-// Algoritmo de ordenamiento por residuo (Default left: 0, right: n-1, bits: cantidad de bits a evaluar)
+/**
+  Algoritmo de ordenamiento por residuo
+  Default (left: 0, right: n-1, bits: cantidad de bits a evaluar)
+*/
 void residuo(int *array, int left, int right, int bit) {
 
   int i, j;
@@ -182,6 +194,69 @@ void radixSort(int *array, int n) {
   }
 }
 
+/**
+  Función para ordenar por mezclar de arreglos (using: merge sort)
+  array_1 (first: start1, last: end1)
+  array_2 (first: start2, last: end2)
+*/
+void mergeList(int *array, int start1, int end1, int start2, int end2) {
+
+  int finalStart, finalEnd, indexC, *result;
+
+  finalStart = start1;
+  finalEnd = end2;
+  indexC = 1;
+  result = new int[end1+end2];
+
+  while ((start1 <= end1) && (start2 <= end2)) {
+    if (array[start1] < array[start2]) {
+      result[indexC] = array[start1];
+      start1++;
+    } else {
+      result[indexC] = array[start2];
+      start2++;
+    }
+    indexC++;
+  }
+
+  if (start1 <= end1) {
+    for (int i = start1; i <= end1; i++) {
+      result[indexC] = array[i];
+      indexC++;
+    }
+  } else {
+    for (int i = start2; i <= end2; i++) {
+      result[indexC] = array[i];
+      indexC++;
+    }
+  }
+
+  indexC = 1;
+
+  for (int i = finalStart; i <= finalEnd; i++) {
+    array[i] = result[indexC];
+    indexC++;
+  }
+
+  delete []result;
+}
+
+/**
+  Algoritmo de ordenamiento por mezcla
+  Default (first: 0, last: n-1)
+*/
+void mergeSort(int *array, int first, int last) {
+
+  int middle;
+
+  if (first < last) {
+      middle = (first+last)/2;
+      mergeSort(array, first, middle);
+      mergeSort(array, middle+1, last);
+      mergeList(array, first, middle, middle+1, last);
+  }
+}
+
 // Función para rellenar un arreglo de formar descendente (peor caso)
 void fillArray(int *array, int n) {
 
@@ -192,7 +267,31 @@ void fillArray(int *array, int n) {
   }
 }
 
-// Función que imprime un arreglo ingresado por parametro <a[]>.
+/**
+  Algoritmo de busqueda binaria
+  Default (sought: valor buscado)
+**/
+int binarySearch(int *array, int n, int sought){
+
+  int middle;
+  int left = 0;
+  int right = n-1;
+
+  while (left <= right) {
+    middle = (left+right)/2;
+    if (sought > array[middle]) {
+      left = middle+1;
+    } else if (sought < array[middle]) {
+      right = middle-1;
+    } else {
+      return middle;
+    }
+  }
+
+  return -1;
+}
+
+// Función que imprime un arreglo ingresado por parametro
 void printArray(int *array, int n) {
 
   for (int i = 0; i < n; i++) {
