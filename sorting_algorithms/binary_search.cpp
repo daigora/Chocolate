@@ -47,16 +47,13 @@ int main(int argc, char const *argv[]) {
   printf("\nIngrese valor a buscar: ");
   scanf("%i", &sought);
 
-  //sought = -1;
+  //sought = -1; // Peor caso
 
+  //QueryPerformanceCounter(&t_ini);
   pos = binarySearch(array, n, sought); // Busqueda binaria
+  //QueryPerformanceCounter(&t_fin);
   printf("\nValor [%i] encontrado en la posicion: %i\n", sought, pos);
   /**
-  // Mide tiempo de ejecución entre &t_ini y &t_fin
-  QueryPerformanceCounter(&t_ini);
-  pos = busquedaBinaria(array, n, sought);
-  QueryPerformanceCounter(&t_fin);
-
   secs = performancecounter_diff(&t_fin, &t_ini);
   fprintf(archivo,"\n%.16g",secs*1000.0);
 

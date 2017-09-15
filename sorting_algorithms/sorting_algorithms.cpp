@@ -3,6 +3,7 @@
   Practica para conocer los algoritmos de ordenamiento basicos y su funcionamiento.
   Ademas se calcula tiempo de ejecución en cada algoritmo para compararlo despues con el t(n) teorico.
 **/
+
 #include <iostream>
 #include <stdio.h>
 #include <time.h>
@@ -50,13 +51,19 @@ int main(int argc, char const *argv[]) {
 
   switch (select) {
     case 1:
+      //QueryPerformanceCounter(&t_ini);
       selectionSort(array, n); // Selección
+      //QueryPerformanceCounter(&t_fin);
       break;
     case 2:
+      //QueryPerformanceCounter(&t_ini);
       insertionSort(array , n); // Inserción
+      //QueryPerformanceCounter(&t_fin);
       break;
     case 3:
+      //QueryPerformanceCounter(&t_ini);
       bubbleSort(array, n); // Burbuja
+      //QueryPerformanceCounter(&t_fin);
       break;
     default:
       cout << "Error - Opcion no valida" << endl;
@@ -66,23 +73,12 @@ int main(int argc, char const *argv[]) {
 
   cout << "\nArreglo Ordenado: " << endl;
   printArray(array, n);
-
-
   /**
-  // Mide tiempo de ejecución entre &t_ini y &t_fin
-  QueryPerformanceCounter(&t_ini);
-  //bubbleSort(array, i);
-  //insertionSort(array , i);
-  //selectionSort(array, i);
-  QueryPerformanceCounter(&t_fin);
-
   secs = performancecounter_diff(&t_fin, &t_ini);
 	fprintf(archivo, "%.16g milliseconds\n", secs*1000.0); // Guarda el tiempo de ejecución en un archivo .txt
 
 	fclose(archivo);
-  **/
 
-  /**
   secs = performancecounter_diff(&t_fin, &t_ini);
   printf("\nTime: %.16g milliseconds\n", secs*1000.0);
   **/
